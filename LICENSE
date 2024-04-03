@@ -1,0 +1,19 @@
+To the maximum extent legally allowed, this software is released under the MIT License:
+
+Copyright 2024 Jeremy Vincent Yu
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ?Software?), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+I hereby acknowledge the original design of eBoto, which was written by Nephia Bianca Dalisay and Patricia Bueno. Some design concepts such as the notion of an Election Authority and the possible actions of the election authority were re-used, but as far as actual code is concerned, this is a full re-implementation.
+
+However, several components are under different licenses, such as web3.js being under the LGPLv3.
+Under each of the subdirectories for each of the eBoto components (eBoto frontend, eBoto hardhat, Authority Daemon, Isolator), you may view the license of each library used by eBoto in:
+
+1. The subfolder of node_modules corresponding to the library, if the library is a JavaScript or TypeScript library
+
+2. The subfolder of lib/python3.11/site-packages corresponding to the library, if the library is a Python library
