@@ -12,8 +12,10 @@ THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED
 I hereby acknowledge the original design of eBoto, which was written by Nephia Bianca Dalisay and Patricia Bueno. Some design concepts such as the notion of an Election Authority and the possible actions of the election authority were re-used, but as far as actual code is concerned, this is a full re-implementation.
 
 However, several components are under different licenses, such as web3.js being under the LGPLv3.
-Under each of the subdirectories for each of the eBoto components (eBoto frontend, eBoto hardhat, Authority Daemon, Isolator), you may view the license of each library used by eBoto in:
+Under each of the subdirectories for each of the Python-using eBoto components (Authority Daemon, Isolator), you may view the license of each library used by eBoto in:
 
 1. The subfolder of node_modules corresponding to the library, if the library is a JavaScript or TypeScript library
 
 2. The subfolder of lib/python3.11/site-packages corresponding to the library, if the library is a Python library
+
+For the components that do not use Python (eBoto frontend, eBoto hardhat), their dependencies are not distributed with the eBoto source code. However, their names and versions are present in that component's package.json. If you install these dependencies by running npm install inside eboto_frontend and eboto_hardhat, then you will find the license of each dependency in the subfolder of node_modules (itself created when you run npm install) corresponding to that dependency.
