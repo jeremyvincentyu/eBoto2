@@ -1,3 +1,5 @@
+sudo cp default /etc/nginx/sites-enabled
+sudo systemctl restart nginx
 python3 -m venv authority_daemon
 python3 -m venv isolator
 cd authority_daemon
