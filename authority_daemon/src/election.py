@@ -208,12 +208,12 @@ class Election:
         self.allocated_keys = allocated_keys.copy()
         for every_voter in structured_voters:
             voter_object = structured_voters[every_voter]
-            allocated_key = allocated_keys.pop()
+            allocated_key = allocated_keys.pop(randint(0,len(allocated_keys)-1))
             voter_object.allocate_control_key(allocated_key["private"],allocated_key["address"])
         
         #In random order, authorize the control keys and assign addresses to each voter
-        addresses_to_authorize = set(structured_voters.keys())
-        keys_to_assign = set(structured_voters.keys())
+        addresses_to_authorize = list(structured_voters.keys())
+        keys_to_assign = list(structured_voters.keys())
 
         while len(addresses_to_authorize)>0 or len(keys_to_assign)>0:
             #If there are both addresses to authorize and keys to assign,
@@ -222,20 +222,20 @@ class Election:
             if len(addresses_to_authorize)>0 and len(keys_to_assign)>0:
                 random_action = randint(0,1)
                 if random_action == 0:
-                    random_address = addresses_to_authorize.pop()
+                    random_address = addresses_to_authorize.pop(randint(0,len(addresses_to_authorize)-1))
                     structured_voters[random_address].authorize_control_address()
                 else:
-                    random_address = keys_to_assign.pop()
+                    random_address = keys_to_assign.pop(randint(0,len(keys_to_assign)-1))
                     structured_voters[random_address].assign_control_key()
             
             #If there are only keys to assign, only choose an account to assign an address to
             elif len(keys_to_assign) > 0:
-                random_address = keys_to_assign.pop()
+                random_address = keys_to_assign.pop(randint(0,len(keys_to_assign)-1))
                 structured_voters[random_address].assign_control_key()
             
             #If there are only addresses to authorize, only choose an account to authorize the address of
             else:
-                random_address=addresses_to_authorize.pop()
+                random_address=addresses_to_authorize.pop(randint(0,len(addresses_to_authorize)-1))
                 structured_voters[random_address].authorize_control_address()
 
         #Once all keys and addresses have been assigned, make the election visible
