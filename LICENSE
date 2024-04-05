@@ -13,7 +13,8 @@ I hereby acknowledge the original design of eBoto, which was written by Nephia B
 
 However, several libraries used are under different licenses, such as web3.js being under the LGPLv3.
 
-In order to avoid causing dependency conflicts and broken environments, these libraries are not distributed with the eBoto2 source code in the source tree, so their licenses do not apply to the source code form of eBoto2. However, they are distributed inside the development VM (in the releases). You can view the licenses of these libraries in:
+In order to avoid causing dependency conflicts and broken environments, these libraries are not distributed with the eBoto2 source code in the source tree, so their licenses do not apply to the source code form of eBoto2. However, they are distributed inside the development VM (in the releases). 
+
 Under each of the subdirectories for each of the eBoto components (eBoto Frontend, eBoto Hardhat, Authority Daemon, Isolator), you may view these libraries' licences in: 
 
 1. The subfolder of node_modules corresponding to the library, if the library is a JavaScript or TypeScript library
