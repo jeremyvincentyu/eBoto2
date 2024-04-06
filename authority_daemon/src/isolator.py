@@ -76,7 +76,7 @@ class Isolator:
 
             transaction[str(voted_candidate.id)] = "1"
 
-            for every_position in range(voted_candidate_position+1,len(self.candidates_by_role)):
+            for every_position in range(voted_candidate_position+1,len(candidates_in_role)):
                 transaction[str(candidates_in_role[every_position].id)] = "0"
 
 
@@ -109,7 +109,7 @@ class Isolator:
 
             transaction[str(voted_candidate.id)] = "1"
 
-            for every_position in range(voted_candidate_position+1,len(self.candidates_by_role)):
+            for every_position in range(voted_candidate_position+1,len(candidates_in_role)):
                 transaction[str(candidates_in_role[every_position].id)] = "0"
         
         return json.dumps(transaction)
