@@ -160,7 +160,7 @@ export default function BallotScreenUI({ ethereum_wallet, selected_election, sel
             encrypted_transaction_hash: EthCrypto.hash.keccak256(ticket_essentials.encrypted),
             ea_signature: ticket_essentials.signature
         }
-        
+        console.log(ticket_essentials.signature)
         const recovered_public_key = EthCrypto.recoverPublicKey(ticket_essentials.signature, full_ticket.encrypted_transaction_hash)
         const known_public_key = await get_public_key(ethereum_wallet)
         ticket_contents.current = JSON.stringify(full_ticket, undefined, 4)

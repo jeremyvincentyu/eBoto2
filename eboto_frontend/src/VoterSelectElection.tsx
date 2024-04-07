@@ -76,6 +76,9 @@ export default function VoterSelectElectionUI({ selected_marker, setStatusMessag
                 const decrypted_key_object = await EthCrypto.decryptWithPrivateKey(private_key, encrypted_key_object)
                 const salted_key_object: ElectionKey = JSON.parse(decrypted_key_object)
                 const election_key = salted_key_object.election_key
+                while (ethereum_wallet.current.web3.eth.accounts.wallet.length > 1){
+                    ethereum_wallet.current.web3.eth.accounts.wallet.remove(ethereum_wallet.current.web3.eth.accounts.wallet.length-1)
+                }
                 ethereum_wallet.current.account = ethereum_wallet.current.web3.eth.accounts.wallet.add(election_key)
                 //console.log(ethereum_wallet.current.account)
             }
@@ -100,6 +103,9 @@ export default function VoterSelectElectionUI({ selected_marker, setStatusMessag
             const salted_key_object: ElectionKey = JSON.parse(decrypted_key_object)
             const election_key:string = salted_key_object.election_key
             //console.log(`Extracted Key:${election_key}`)
+            while (ethereum_wallet.current.web3.eth.accounts.wallet.length > 1){
+                ethereum_wallet.current.web3.eth.accounts.wallet.remove(ethereum_wallet.current.web3.eth.accounts.wallet.length-1)
+            }
             ethereum_wallet.current.account = ethereum_wallet.current.web3.eth.accounts.wallet.add(election_key)
             }
         }

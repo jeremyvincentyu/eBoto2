@@ -98,8 +98,10 @@ export async function create_ballot(ethereum_wallet: MutableRefObject<PackedWall
         const body = JSON.stringify({ election_name, control_address, auth_token, transaction })
         const signature_response = await fetch("/submit_voter_transaction", post_body(body))
         const actual_signature = await signature_response.text()
+        //
+        
         //Check if the returned signature is actually a wait instruction
-        if (actual_signature === "Wait") {
+        if (actual_signature === "Wait" || actual_signature.includes("<html>")) {
             //If it is, keep checking until the late phase starts
             while (!blockchain_available) {
                 blockchain_available = await check_blockchain_available()
