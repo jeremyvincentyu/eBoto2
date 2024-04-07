@@ -6,12 +6,17 @@ However, if you insist on developing locally or want to set up your own containe
 2. Run bash install.sh, saying yes whenever prompted. You will need to provide your sudo password when prompted so that the nginx file gets copied to the correct place.  
 
 
-To start eBoto 2.0, do the following(make sure to follow the steps in the correct order):
+To start eBoto 2.0, whether you are using the eBoto developer VM or running eBoto in your own container, do the following(make sure to follow the steps in the correct order):
 1. Run python3 reset.py
 2. Run bash hardhat.sh in that same window and wait until the terminal says that the smart contract has been deployed
 3. In another terminal window, run bash isolator.sh
 4. In another terminal window, run bash authority.sh
 5. Navigate to 127.0.0.1 in the browser.  
+
+To terminate the backends, just enter Ctrl +C on each of the terminals that you opened.
+For the frontend, it is sufficient to close your browser.
+
+A video containing a functionality test of eBoto2, which doubles as a usage demo, is available at https://www.youtube.com/watch?v=TNGxuAhD1Rw
 
 For some reason, attempting to combine steps 2 to 4 in start_instance.py using Python's subprocess module results in voters not being able to login during testing, among other unexplained bugs, but doing them separately results in a perfectly fine working setup.
 
