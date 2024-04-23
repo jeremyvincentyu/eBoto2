@@ -82,7 +82,9 @@ async function download_data(ethereum_wallet: MutableRefObject<PackedWallet>, se
 
 function switch_to_ea_view(keyfile: MutableRefObject<HTMLInputElement | null>, ethereum_wallet: MutableRefObject<PackedWallet>, setVoterDatabase: voterDatabaseSetter) {
     async function get_authority_address() {
+        console.log("Attempting to Obtain Authority Address")
         const contract_authority_address: string = await ethereum_wallet.current.contract.methods.get_authority_address().call()
+        console.log(`Obtained Address is ${contract_authority_address}`)
         if (ethereum_wallet.current.account[0].address !== contract_authority_address) {
             window.location.href = "#/authority_error"
             ethereum_wallet.current.account.clear()

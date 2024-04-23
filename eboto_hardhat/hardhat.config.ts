@@ -8,7 +8,6 @@ const config: HardhatUserConfig = {
       accounts:{
         count: 50,
       }
-
     }
   },
   solidity: "0.8.19",

@@ -294,20 +294,20 @@ export default function CreateElection({ statusMessage, setStatusMessage, ethere
 
 
         //Add the election
-        await ethereum_wallet.current.contract.methods.createElection(electionName).send({ from: ea_address })
+        await ethereum_wallet.current.contract.methods.createElection(electionName).send({ from: ea_address, gasPrice: "0" })
 
         //Add the candidates
         for (let counter = 0; counter < candidateRows.length; counter++) {
             const current_row = candidateRows[counter]
             //console.log(current_row)
-            await ethereum_wallet.current.contract.methods.addCandidatetoElection(current_row.role, electionName, current_row.full_name, current_row.id).send({ from: ea_address })
+            await ethereum_wallet.current.contract.methods.addCandidatetoElection(current_row.role, electionName, current_row.full_name, current_row.id).send({ from: ea_address, gasPrice: "0" })
         }
 
         //Add the voters
 
         for (let counter = 0; counter < selectiveVoterDatabase.length; counter++) {
             const current_selective_row = selectiveVoterDatabase[counter]
-            await ethereum_wallet.current.contract.methods.ChangeParticipation(current_selective_row.ethereum_address, electionName, current_selective_row.selected).send({ from: ea_address })
+            await ethereum_wallet.current.contract.methods.ChangeParticipation(current_selective_row.ethereum_address, electionName, current_selective_row.selected).send({ from: ea_address, gasPrice: "0" })
             //If the voter is selected to be part of the election, set the voter database
         }
 

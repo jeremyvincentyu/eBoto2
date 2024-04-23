@@ -1,0 +1,9 @@
+__pycache__/
+bin/
+build/
+clef/
+data/
+include/
+lib/
+lib64/
+node_modules/

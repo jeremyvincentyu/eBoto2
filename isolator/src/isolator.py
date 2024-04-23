@@ -2,6 +2,7 @@ from flask import Flask,request
 from election_list import ElectionList
 from eth_crypto import encrypt
 from secrets import randbits
+from web3.middleware.geth_poa import geth_poa_middleware
 from web3 import Web3
 import json
 
@@ -16,7 +17,7 @@ encrypted_master_token = encrypt(ea_public_key,master_token)
 isolator_token: list[str] = []
 election_list = ElectionList(isolator_token)
 web3_instance = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
-
+web3_instance.middleware_onion.inject(geth_poa_middleware, layer =0)
 
 with open("src/deployed_addresses.json","r") as address_file:
     address_object: dict[str,str] = json.loads(address_file.read())
@@ -103,13 +104,19 @@ def late_phase():
 @app.route("/request_auth_token",methods=["POST"])
 def request_token():
     try:
+        print(f"Request text is {request.get_data().decode()}")
         parameters:dict[str,str] =  request.get_json()
+        print(f"Parameter type is {type(parameters)}")
         if type(parameters) != dict:
+            print(f"Parameters sent are {parameters}")
             return "Malformed Request"
         election_name = parameters.get("election_name","")
         control_address = parameters.get("control_address","")
-        return election_list.request_auth_token(election_name,control_address)
+        auth_token = election_list.request_auth_token(election_name,control_address)
+        print(f"Returning crypted token {auth_token}")
+        return auth_token
     except:
+        print("Returning error message for requester")
         return "Malformed Request"
 
 #Intercepted

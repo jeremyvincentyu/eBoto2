@@ -90,7 +90,7 @@ async function commit_changes(){
         const candidate_id = current_row.id
         const candidate_info: ContractCandidate = await ethereum_wallet.current.contract.methods.getCandidateData(selected_election.current,candidate_id).call()
         if (candidate_info.role !== current_row.role){
-                await ethereum_wallet.current.contract.methods.ChangeCandidateRole(candidate_id,current_row.role,selected_election.current).send({from: ea_address})
+                await ethereum_wallet.current.contract.methods.ChangeCandidateRole(candidate_id,current_row.role,selected_election.current).send({from: ea_address, gasPrice: "0"})
         }
         }
 }

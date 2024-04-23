@@ -7,6 +7,7 @@ from hashlib import sha256
 from math import floor
 from time import sleep
 from web3.contract.contract import Contract
+from web3.types import TxParams,Wei
 import json
 
 class Isolator:
@@ -265,7 +266,7 @@ class Isolator:
                     salted_height = json.dumps({"height": str(len(all_transactions)), "salt": str(randbits(256))})
                     ea_public_key = private2public(self.private_key)
                     encrypted_height = encrypt(ea_public_key,salted_height)
-                    self.contract.functions.set_encrypted_ea_height(self.election_name,voter_address,encrypted_height).transact()
+                    self.contract.functions.set_encrypted_ea_height(self.election_name,voter_address,encrypted_height).transact(TxParams({"gasPrice": Wei(0)}))
                     break
 
         for every_transaction in all_transactions:

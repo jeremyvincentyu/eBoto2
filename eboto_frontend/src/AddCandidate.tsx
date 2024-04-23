@@ -55,7 +55,7 @@ function NewCard({selected_election, rows, setRows, ethereum_wallet}:NewCardInte
 
     async function addNewCandidateBackend(){
     const ea_address= ethereum_wallet.current.account[0].address
-    await ethereum_wallet.current.contract.methods.addCandidatetoElection(newCandidateRole,selected_election.current, newCandidateName, rows.length).send({from: ea_address})
+    await ethereum_wallet.current.contract.methods.addCandidatetoElection(newCandidateRole,selected_election.current, newCandidateName, rows.length).send({from: ea_address, gasPrice:"0"})
     }
 
     const addNewCandidate = ()=>{

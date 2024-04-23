@@ -28,4 +28,6 @@ system(erase_old_elections)
 erase_old_list = "rm isolator/data/election_list.json"
 system(erase_old_list)
 
-
+#Reset Geth using start.py
+reset_geth_command = "bash reset_geth.sh"
+system(reset_geth_command)

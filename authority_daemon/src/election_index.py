@@ -6,13 +6,14 @@ from hashlib import sha256
 from flask import Request
 import json
 from web3.middleware.signing import construct_sign_and_send_raw_middleware
+from web3.middleware.geth_poa import geth_poa_middleware
 from eth_account import Account
 
 class ElectionIndex:
     def __init__(self) -> None:
         self.election_list: dict[str,Election] = {}
         self.web3_instance = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
-
+        self.web3_instance.middleware_onion.inject(geth_poa_middleware,layer=0)
         with open("data/authority.json","r") as keyfile:
             keyfile_object: dict[str,str] = json.loads(keyfile.read()) 
             self.authority_account = Account.from_key(keyfile_object["private"])

@@ -34,6 +34,7 @@ class ElectionList(ProtoList):
             
     def request_auth_token(self, election_name: str, control_address: str)->str:
         try:
+            print(f"Election name in election list is {election_name in self.election_list}")
             return self.election_list[election_name].request_auth_token(control_address)
         except:
             return "Malformed request"

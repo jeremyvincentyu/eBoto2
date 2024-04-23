@@ -3,6 +3,8 @@ from eth_crypto import encrypt, private2public
 from collections import deque
 from web3 import Web3, Account
 from web3.middleware.signing import construct_sign_and_send_raw_middleware
+from web3.middleware.geth_poa import geth_poa_middleware
+from web3.types import TxParams,Wei
 from threading import Thread,Lock
 from os import path
 from hashlib import sha256
@@ -28,6 +30,7 @@ class Voter:
         self.isolator_token = isolator_token
         self.election_name = election_name
         self.web3_instance = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
+        self.web3_instance.middleware_onion.inject(geth_poa_middleware, layer=0)
         self.voter_account = Account.from_key(self.private_key)
         self.web3_instance.eth.default_account = self.voter_account.address
         self.web3_instance.middleware_onion.add(construct_sign_and_send_raw_middleware(self.voter_account))
@@ -91,7 +94,7 @@ class Voter:
         self.transaction_lock.acquire()
         transaction =self.tx_history_deque.popleft()
         print(f"Now flushing transaction: {transaction}")
-        self.contract.functions.submit_voter_transaction(self.election_name,transaction).transact()
+        self.contract.functions.submit_voter_transaction(self.election_name,transaction).transact(TxParams({"gasPrice": Wei(0)}))
         self.transaction_lock.release()
 
     def enqueue_signature(self, signature: str):

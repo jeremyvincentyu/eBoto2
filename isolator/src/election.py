@@ -73,6 +73,7 @@ class Election:
             self.voters[every_keypair["address"]] = Voter(every_keypair,self.election_name,self.isolator_token)
     
     def request_auth_token(self,control_address: str):
+        print(f"Control address registered is {control_address in self.voters}")
         return self.voters[control_address].request_auth_token()
     
     def quota_reached(self)->bool:

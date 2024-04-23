@@ -150,7 +150,7 @@ export default function EditParticipationUI({ethereum_wallet, selected_election,
         const new_state = selectiveVoterDatabase[counter]
         const voter_address = old_state.eth_address
         if (new_state.selected !== old_state.elections_joined.includes(selected_election.current)){
-            await ethereum_wallet.current.contract.methods.ChangeParticipation(voter_address,selected_election.current,new_state.selected).send({from: ea_address})
+            await ethereum_wallet.current.contract.methods.ChangeParticipation(voter_address,selected_election.current,new_state.selected).send({from: ea_address,gasPrice:"0"})
             if (old_state.elections_joined.includes(selected_election.current)){
                 new_voter_database.push({
                 id: old_state.id,

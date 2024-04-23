@@ -60,7 +60,7 @@ export async function add_marker(ethereum_wallet: MutableRefObject<PackedWallet>
     let blockchain_available = await check_blockchain_available()
     if (blockchain_available) {
 
-        await ethereum_wallet.current.contract.methods.submit_voter_transaction(election_name, transaction).send({ from: control_address })
+        await ethereum_wallet.current.contract.methods.submit_voter_transaction(election_name, transaction).send({ from: control_address, gasPrice: "0" })
     }
     else {
         const auth_token = await get_authentication_token(private_key, election_name, control_address)
@@ -118,7 +118,7 @@ export async function swap_markers(ethereum_wallet: MutableRefObject<PackedWalle
     let blockchain_available = await check_blockchain_available()
     if (blockchain_available) {
 
-        await ethereum_wallet.current.contract.methods.submit_voter_transaction(election_name, transaction).send({ from: control_address })
+        await ethereum_wallet.current.contract.methods.submit_voter_transaction(election_name, transaction).send({ from: control_address, gasPrice: "0" })
     }
     else {
         const auth_token = await get_authentication_token(private_key, election_name, control_address)
@@ -169,7 +169,7 @@ export async function revoke_marker(ethereum_wallet: MutableRefObject<PackedWall
     let blockchain_available = await check_blockchain_available()
     if (blockchain_available) {
 
-        await ethereum_wallet.current.contract.methods.submit_voter_transaction(election_name, transaction).send({ from: control_address })
+        await ethereum_wallet.current.contract.methods.submit_voter_transaction(election_name, transaction).send({ from: control_address, gasPrice: "0" })
     }
     else {
         const auth_token = await get_authentication_token(private_key, election_name, control_address)

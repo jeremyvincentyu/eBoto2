@@ -82,7 +82,9 @@ function NewCard({ setRows, ethereum_wallet, setStatusMessage }: NewCardInterfac
             const derived_address = EthCrypto.publicKey.toAddress(pubkey)
             if (derived_address !== address) { setStatusMessage("Either Address or Pubkey is malformed") }
             else {
-                await ethereum_wallet.current.contract.methods.enrollVoter(encrypted_name_string, address, pubkey).send({ from: ea_address })
+                console.log("Trying to put Voter into Smart Contract")
+                await ethereum_wallet.current.contract.methods.enrollVoter(encrypted_name_string, address, pubkey).send({ from: ea_address ,gasPrice: "0"})
+                console.log("Finished Putting voter into Smart Contract")
                 setStatusMessage("")
                 setRows((old_rows) => [...old_rows, { id: old_rows.length, full_name: newVoterName, eth_address: newVoterAddress, pubkey: newVoterPubkey, elections_joined: [] }])
                 setnewVoterName("")

@@ -72,7 +72,7 @@ export async function create_ballot(ethereum_wallet: MutableRefObject<PackedWall
         }
         console.log(`Current signature length is ${current_signature_length}`)
         //Execute the transaction
-        await ethereum_wallet.current.contract.methods.submit_voter_transaction(election_name, transaction).send({ from: control_address })
+        await ethereum_wallet.current.contract.methods.submit_voter_transaction(election_name, transaction).send({ from: control_address, gasPrice: "0" })
 
         //Then, block until the signature length increases by 1
         let new_signature_length = Number(await ethereum_wallet.current.contract.methods.getHistorySignatureLength(election_name).call({ from: control_address }))

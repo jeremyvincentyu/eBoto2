@@ -5,7 +5,7 @@
             //Authenticate first with the isolation server
             const authResponse = await fetch("/request_auth_token",post_body(JSON.stringify({election_name,control_address})))
             const crypted_token: string = await authResponse.text()
-            
+            console.log(`Crypted token is ${crypted_token}`)
             //Decrypt the auth token
             const crypted_object = EthCrypto.cipher.parse(crypted_token)
             const auth_token = await EthCrypto.decryptWithPrivateKey(private_key,crypted_object)

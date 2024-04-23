@@ -1,6 +1,7 @@
 from threading import Thread, Lock
 from web3 import Web3
 from web3.contract.contract import Contract
+from web3.types import TxParams,Wei
 from eth_crypto import decrypt,sign
 from candidate import Candidate, group_candidates_by_role
 from os import path
@@ -14,7 +15,7 @@ from voter import Voter
 from random import randint
 from pool_manager import allocate_accounts
 from isolator import Isolator
-from nonce import get_nonce
+
 import json
 
 #An election has a start dates, an end date, and participants
@@ -84,7 +85,7 @@ class Election:
     
     #Push a pre-existing signature to the blockchain
     def push_signature_to_chain(self, some_signature: str, control_address: str):
-        self.contract.functions.sign_voter_transaction(self.election_name, control_address, some_signature).transact()
+        self.contract.functions.sign_voter_transaction(self.election_name, control_address, some_signature).transact(TxParams({"gasPrice": Wei(0)}))
     
     #This function should only be called during the late phase
     def sign_new_transactions(self):
@@ -101,7 +102,7 @@ class Election:
                 for transaction_id in range(len(signatures),len(voter_transaction)):
                     transaction = voter_transaction[transaction_id]
                     signature = self.sign_single_transaction(transaction)
-                    self.contract.functions.sign_voter_transaction(self.election_name,control_address,signature).transact()
+                    self.contract.functions.sign_voter_transaction(self.election_name,control_address,signature).transact(TxParams({"gasPrice": Wei(0)}))
                     print(f"Just signed {transaction} with signature {signature}")
             
     
@@ -119,7 +120,7 @@ class Election:
         self.isolator.flush_election()
 
         #Actually end election
-        self.contract.functions.end_election(self.election_name).transact()
+        self.contract.functions.end_election(self.election_name).transact(TxParams({"gasPrice": Wei(0)}))
         
         #Initialize all candidates to have 0 votes
         for every_id in self.candidate_ids:
@@ -132,7 +133,7 @@ class Election:
 
         #Finally, upload the results back into the blockchain
         for every_candidate in self.candidate_ids:
-            self.contract.functions.set_election_results(self.election_name,every_candidate,self.election_results[every_candidate]).transact()
+            self.contract.functions.set_election_results(self.election_name,every_candidate,self.election_results[every_candidate]).transact(TxParams({"gasPrice": Wei(0)}))
 
     def regenerate_ballot(self,control_key: dict[str,str]):
         voter_address = control_key["address"]
@@ -238,10 +239,8 @@ class Election:
                 random_address=addresses_to_authorize.pop(randint(0,len(addresses_to_authorize)-1))
                 structured_voters[random_address].authorize_control_address()
 
-        #Once all keys and addresses have been assigned, make the election visible
-        if type(self.web3_instance.eth.default_account) == str:
-            print(f"Transaction count, from fresh nonce, is {get_nonce(self.web3_instance.eth.default_account)}")
-        self.contract.functions.make_visible(self.election_name).transact()
+
+        self.contract.functions.make_visible(self.election_name).transact(TxParams({"gasPrice": Wei(0)}))
 
         #Build out the candidate list
         self.build_candidate_list()      
