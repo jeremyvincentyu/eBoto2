@@ -3,7 +3,9 @@ I recommend that you download the eBoto 2.0 development VM instead of installing
 However, if you insist on developing locally or want to set up your own containerization, here's what you have to do:  
 1. Install these dependencies: npm, python3-venv, nginx, rsync. You can use your Linux distro's package manager to do this. For npm, you may prefer to install the latest npm directly from the NPM website.
 
-2. Run bash install.sh, saying yes whenever prompted. You will need to provide your sudo password when prompted so that the nginx file gets copied to the correct place.  
+2.Install geth and clef into /usr/local/bin from release/1.13 of https://github.com/ethereum/go-ethereum
+
+3. Run bash install.sh, saying yes whenever prompted. You will need to provide your sudo password when prompted so that the nginx file gets copied to the correct place.  
 
 
 To start eBoto 2.0, whether you are using the eBoto developer VM or running eBoto in your own container, do the following(make sure to follow the steps in the correct order):
@@ -24,6 +26,4 @@ The election authority's private key is in authority_daemon/data/authority.json.
 
 DO NOT use the authority.json here as the Election Authority's private key in an actual production system. This private key is only for development and testing, because it is public knowledge.  
 
-Instead, generate a new Ethereum private key, replace authority.json with another authority.json containing that new private key in the same format, and edit eboto_hardhat/ignition/modules/deploy.ts, replacing authority_address and authority_pubkey with the Ethereum address and Ethereum public key corresponding to your new private key.  
-
-Also, for production, replace the private keys in authority_daemon/data/initial_accounts.json with new private keys, since those private keys are already public knowledge by being in this public repository. 
+Whenever you run reset.py, a new authority.json is generated. make sure to run it at least once before deploying.
