@@ -9,11 +9,12 @@ However, if you insist on developing locally or want to set up your own containe
 
 
 To start eBoto 2.0, whether you are using the eBoto developer VM or running eBoto in your own container, do the following(make sure to follow the steps in the correct order):
-1. Run python3 reset.py
-2. Run bash hardhat.sh in that same window and wait until the terminal says that the smart contract has been deployed
-3. In another terminal window, run bash isolator.sh
-4. In another terminal window, run bash authority.sh
-5. Navigate to 127.0.0.1 in the browser.  
+1. Run python3 reset.py and follow the prompts
+2. Run python3 run_geth.py, following thye prompts,  in that same window and wait until you see a mention of blocks being sealed
+3. In another terminal window, run deploy_poa.sh, following the prompts.
+4. In another terminal window, run bash isolator.sh
+5. In another terminal window, run bash authority.sh
+6. Navigate to 127.0.0.1 in the browser.  
 
 To terminate the backends, just enter Ctrl +C on each of the terminals that you opened.
 For the frontend, it is sufficient to close your browser.
