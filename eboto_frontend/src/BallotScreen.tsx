@@ -6,6 +6,7 @@ import download_and_interpret_history from "./interpret_history"
 import { create_ballot } from "./create_ballot"
 import EthCrypto from "eth-crypto"
 import { get_public_key } from "./get_public_key"
+import BackBar from "./BackBar"
 
 interface PackedWallet {
     web3: Web3,
@@ -150,7 +151,7 @@ export default function BallotScreenUI({ ethereum_wallet, selected_election, sel
 
         //Put them into the Poll Caster
         const ticket_essentials = await create_ballot(ethereum_wallet, selected_election.current, active_marker, marker_array_length, candidate_votes)
-        
+
         //Require that the signature actually belongs to the EA
 
         const full_ticket = {
@@ -164,37 +165,49 @@ export default function BallotScreenUI({ ethereum_wallet, selected_election, sel
         const recovered_public_key = EthCrypto.recoverPublicKey(ticket_essentials.signature, full_ticket.encrypted_transaction_hash)
         const known_public_key = await get_public_key(ethereum_wallet)
         ticket_contents.current = JSON.stringify(full_ticket, undefined, 4)
-        
-        if (recovered_public_key === known_public_key){
-        console.log("Verification Succeeded")
-        window.location.href = "#/ticket_screen"
+
+        if (recovered_public_key === known_public_key) {
+            console.log("Verification Succeeded")
+            window.location.href = "#/ticket_screen"
         }
 
-        else{
+        else {
             console.log("Veriication failed")
             console.log(`Recovered public key is ${recovered_public_key}, but known public key is ${known_public_key}`)
         }
     }
 
     return (
-        <Grid container rowSpacing={15}>
+        <Grid container rowSpacing={15} sx={{
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundImage: `url("images/ballot_screen.png")`,
+            backgroundRepeat: "no-repeat",
+            height: "40em"
+        }}>
+            <Grid item xs={12}>
+            <BackBar back_function={()=>{window.location.href="#/cheater_screen"}} authority_bar={false}/>
+            </Grid>
 
             <Grid item xs={12}>
-                <Typography variant="h2" component="h2">
-                    Select Candidates
-                </Typography>
+                <Card>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Typography variant="h4" component="h4">
+                                Select Candidates
+                            </Typography>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <BallotCard rolesWithChoices={rolesWithChoices} setRolesWithChoices={setRolesWithChoices} />
+                        </Grid>
+                    </Grid>
+                </Card>
             </Grid>
 
-            <Grid item xs={12}>
-                <BallotCard rolesWithChoices={rolesWithChoices} setRolesWithChoices={setRolesWithChoices} />
-            </Grid>
-
-            <Grid item xs={1} md={9}>
-            </Grid>
-
-            <Grid item xs={11} md={3}>
+            <Grid item xs={12} md={12}>
                 <Button variant="contained" onClick={cast_vote}>
-                    Submit
+                    Vote
                 </Button>
             </Grid>
 

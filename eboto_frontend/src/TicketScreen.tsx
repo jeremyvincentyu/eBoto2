@@ -1,5 +1,6 @@
 import {Grid, Typography, Card, Button} from "@mui/material"
 import { MutableRefObject } from "react"
+import BackBar from "./BackBar"
 
 function TicketCard({ticket_contents}: {ticket_contents: MutableRefObject<string>}){
     function download_ticket(){
@@ -14,11 +15,11 @@ function TicketCard({ticket_contents}: {ticket_contents: MutableRefObject<string
     }
 
     return (
-        <Card elevation={8} sx={{padding: "1em"}}>
+        <Card elevation={8} sx={{padding: "1em", backgroundColor: "#0ec970"}}>
         <Grid container rowSpacing={6}>
 
         <Grid item xs={12}>
-        <Typography variant="body2" component="h6">
+        <Typography variant="h5" component="h5">
         Would you like to download a ticket?
         </Typography>
         </Grid>
@@ -41,11 +42,16 @@ function return_to_election_menu(){
 export default function TicketScreenUI({ticket_contents}: {ticket_contents: MutableRefObject<string>}){
 return (
     <Grid container rowSpacing={5}>
+    
+    <Grid item xs={12}>
+    <BackBar back_function={return_to_election_menu} authority_bar={false}/>
+    </Grid>
 
     <Grid item xs={12}>
     <Typography variant ="h4" component="h4">
     Thank you for casting your vote
     </Typography>
+
     </Grid>
 
     <Grid item xs={2}>
@@ -58,11 +64,7 @@ return (
     <Grid item xs={2}>
     </Grid>
 
-    <Grid item xs={12}>
-    <Button variant="contained" onClick={return_to_election_menu}>
-    Return to Elections Menu
-    </Button>
-    </Grid>
+
 
 
     </Grid>

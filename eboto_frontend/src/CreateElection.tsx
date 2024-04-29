@@ -5,6 +5,7 @@ import { DateTimePicker } from '@mui/x-date-pickers'
 import { Web3, Contract, ContractAbi, Web3BaseWallet, Web3BaseWalletAccount } from 'web3'
 import dayjs, { Dayjs } from 'dayjs'
 import EthCrypto from 'eth-crypto'
+import BackBar from './BackBar'
 
 //Taken from MUI-X Documentation on CRUD DataGrid at mui.com/x/react-data-grid/editing
 interface EditToolbarProps {
@@ -281,12 +282,12 @@ export default function CreateElection({ statusMessage, setStatusMessage, ethere
         const encrypted_auth_object = EthCrypto.cipher.parse(encrypted_auth_packed)
         const private_key = ethereum_wallet.current.account[0].privateKey
         const decrypted_auth_token = await EthCrypto.decryptWithPrivateKey(private_key, encrypted_auth_object)
-       
+
         //Store the election Date Locally Later On
         //Ensure that the End Date is not older than the present date. If it is, update the status  message and return.
-        if (endDate !== null){
-            const now =dayjs()
-            if (endDate<now){
+        if (endDate !== null) {
+            const now = dayjs()
+            if (endDate < now) {
                 setStatusMessage("Cannot end election in the past!")
                 return
             }
@@ -349,8 +350,15 @@ export default function CreateElection({ statusMessage, setStatusMessage, ethere
 
 
     return (
-        <Grid container rowSpacing={10} columnSpacing={20}>
-    
+        <Grid container rowSpacing={10} columnSpacing={20} sx={{
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundImage: `url("images/create.png")`,
+            backgroundRepeat: "no-repeat",
+        }}>
+            <Grid item xs={12}>
+                <BackBar back_function={() => { window.location.href = "#/ea_dashboard" }} authority_bar={true} />
+            </Grid>
 
             <Grid item xs={12}>
                 <DateCard startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
@@ -363,22 +371,27 @@ export default function CreateElection({ statusMessage, setStatusMessage, ethere
             <Grid item xs={6}>
                 <VoterCard rows={selectiveVoterDatabase} setRows={setSelectiveVoterDatabase} />
             </Grid>
-
             <Grid item xs={12}>
-                <Typography variant="body2" component="h6">
-                    {statusMessage}
-                </Typography>
+                <Card>
+                    <Grid container>
+
+                        <Grid item xs={12}>
+                            <Typography variant="body2" component="h6">
+                                {statusMessage}
+                            </Typography>
+                        </Grid>
+
+                        <Grid item xs={6}>
+                            <TextField label="Election Name" value={electionName} onChange={(e) => setElectionName(e.target.value)} />
+                        </Grid>
+
+                        <Grid item xs={6}>
+                            <Button variant="contained" onClick={commit_election}>Submit</Button>
+                        </Grid>
+
+                    </Grid>
+                </Card>
             </Grid>
-
-            <Grid item xs={6}>
-                <TextField label="Election Name" value={electionName} onChange={(e) => setElectionName(e.target.value)} />
-            </Grid>
-
-            <Grid item xs={6}>
-                <Button variant="contained" onClick={commit_election}>Submit</Button>
-            </Grid>
-
-
         </Grid>
     )
 

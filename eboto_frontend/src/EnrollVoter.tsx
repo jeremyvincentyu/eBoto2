@@ -3,6 +3,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { useState, useRef, MutableRefObject } from 'react'
 import EthCrypto from 'eth-crypto';
 import { Web3, Contract, ContractAbi, Web3BaseWallet, Web3BaseWalletAccount } from 'web3'
+import BackBar from "./BackBar";
 
 interface VoterRow {
     id: number,
@@ -122,7 +123,6 @@ function NewCard({ setRows, ethereum_wallet, setStatusMessage }: NewCardInterfac
 
     return (
         <Card elevation={8} style={{ padding: "1em" }} >
-
             <Grid container rowSpacing={5}>
 
                 <Grid item xs={12}>
@@ -164,8 +164,15 @@ interface EnrollVoterInterface {
 export default function EnrollVoterUI({ rows, setRows, ethereum_wallet }: EnrollVoterInterface) {
     const [statusMessage, setStatusMessage] = useState("")
     return (
-        <Grid container columnSpacing={20}>
-
+        <Grid container columnSpacing={20} sx={{            
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundImage: `url("images/enroll.png")`,
+            backgroundRepeat: "no-repeat",
+            }}>
+            <Grid item xs={12}>
+            <BackBar back_function={()=>{window.location.href="#/ea_dashboard"}} authority_bar={true}/>
+            </Grid>
             <Grid item xs={6}>
                 <VotersCard rows={rows} />
             </Grid>

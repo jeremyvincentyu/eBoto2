@@ -1,4 +1,4 @@
-import { Button, Grid, FormControl, Radio, RadioGroup, Typography } from "@mui/material"
+import { Button, Grid, FormControl, Radio, RadioGroup, Typography, Card } from "@mui/material"
 import { ChangeEvent, MutableRefObject } from 'react'
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
@@ -10,6 +10,8 @@ import { add_marker, swap_markers, revoke_marker } from "./marker_manipulation"
 import download_candidates from "./download_candidates"
 import useMediaQuery from "@mui/material/useMediaQuery"
 import { createTheme } from "@mui/material/styles"
+import BackBar from "./BackBar"
+
 interface PackedWallet {
     web3: Web3,
     contract: Contract<ContractAbi>,
@@ -133,15 +135,15 @@ function SingleRow({ voting_key, setVotingKeys, revokedKeys }: KeyRow) {
             </Grid>
             
             <Grid item md={1} xs={3} zeroMinWidth>
-                <Button variant="outlined" startIcon={<DeleteOutlineIcon />} onClick={revoke} />
+                <Button  startIcon={<DeleteOutlineIcon style={{color: "red"}}/>} onClick={revoke} />
             </Grid>
             
             <Grid item md={1} xs={3} zeroMinWidth>
-                <Button variant="outlined" startIcon={<ArrowDownwardIcon />} onClick={swap_down} />
+                <Button  startIcon={<ArrowDownwardIcon />} onClick={swap_down} />
             </Grid>
 
             <Grid item md={1} xs={3} zeroMinWidth>
-                <Button variant="outlined" startIcon={<ArrowUpwardIcon />} onClick={swap_up} />
+                <Button  startIcon={<ArrowUpwardIcon />} onClick={swap_up} />
             </Grid>
 
 
@@ -181,11 +183,13 @@ function KeyCard({ activeKey, setActiveKey, votingKeys, setVotingKeys, revokedKe
     }
 
     return (
+            <Card>
             <FormControl>
                 <RadioGroup value={activeKey} onChange={guiSetActiveKey}>
                     {votingKeys.map(make_row)}
                 </RadioGroup>
             </FormControl>
+            </Card>
     )
 }
 
@@ -344,6 +348,13 @@ export default function CheaterScreenUI({ statusMessage, setStatusMessage, activ
 
     return (
         <Grid container rowSpacing={{xs: 4, md:10}} columnSpacing={{xs: 4, md:10}}>
+            <Grid item xs={12} md={12} zeroMinWidth>
+                <BackBar back_function={()=>{window.location.href="/voter_select_election"}} authority_bar={false}/>
+            </Grid>
+
+            <Grid item xs={12} md={12} zeroMinWidth>
+                <Typography variant="h5" component="h5">Please select a marker</Typography>
+            </Grid>
 
             <Grid item xs={12} md={12} zeroMinWidth>
                 <KeyCard activeKey={activeKey} setActiveKey={setActiveKey} votingKeys={votingKeys} setVotingKeys={setVotingKeys} revokedKeys={revokedKeys} selected_marker={selected_marker} />

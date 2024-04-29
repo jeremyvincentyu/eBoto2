@@ -2,6 +2,7 @@ import {TextField, Grid, Button, Card} from "@mui/material"
 import {DataGrid, GridColDef,GridRowModesModel} from '@mui/x-data-grid'
 import {useState, MutableRefObject} from 'react'
 import { Web3, Contract, Web3BaseWallet, Web3BaseWalletAccount, ContractAbi } from 'web3'
+import BackBar from "./BackBar"
 
 interface CandidateRow{
     id: number,
@@ -95,8 +96,13 @@ function NewCard({selected_election, rows, setRows, ethereum_wallet}:NewCardInte
 export default function AddCandidateUI({selected_election,ethereum_wallet,rows,setRows}: NewCardInterface){
     //const [rows, setRows] = useState([]);
     return (
-        <Grid container columnSpacing={20}>
-
+        <Grid container columnSpacing={20} sx={{
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundImage: `url("images/add_candidate.png")`,
+            backgroundRepeat: "no-repeat",
+        }}>
+        <BackBar back_function={()=>{window.location.href="#/modify_election"}} authority_bar={true}/>
         <Grid item xs= {6}>
         <CandidateCard rows={rows}/>
         </Grid>

@@ -2,6 +2,7 @@ import {Card,Grid,Button,Checkbox,FormControlLabel,FormGroup} from '@mui/materia
 import {DataGrid, GridColDef, GridToolbarContainer, GridRenderCellParams } from '@mui/x-data-grid'
 import {useState, ChangeEvent, MutableRefObject} from 'react'
 import {Web3, Contract, ContractAbi, Web3BaseWallet, Web3BaseWalletAccount} from 'web3'
+import BackBar from './BackBar'
 
 interface SelectiveVoterRow{
  id: number,
@@ -184,8 +185,18 @@ export default function EditParticipationUI({ethereum_wallet, selected_election,
     }
 
     return (
-    <Grid container rowSpacing={10}>
-
+    <Grid container rowSpacing={10} sx={{
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundImage: `url("images/edit_participation.png")`,
+        backgroundRepeat: "no-repeat",
+        alignItems: "stretch",
+        justifyContent: "center",
+        display: "flex"
+    }}>
+    <Grid item xs={12}>
+        <BackBar back_function={()=>{window.location.href="#/modify_election"}} authority_bar={true}/>
+    </Grid>
     <Grid item xs={12}>
     <VoterCard selectiveVoterDatabase={selectiveVoterDatabase}  setSelectiveVoterDatabase={setSelectiveVoterDatabase}/>
     </Grid>

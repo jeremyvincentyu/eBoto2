@@ -6,7 +6,7 @@ import { SelectChangeEvent } from "@mui/material/Select"
 import check_blockchain_available from "./blockchain_available"
 import post_body from "./post_body"
 import download_and_interpret_history from "./interpret_history"
-
+import BackBar from "./BackBar"
 
 interface PackedWallet {
     web3: Web3,
@@ -16,7 +16,7 @@ interface PackedWallet {
 
 function logout(ethereum_wallet: MutableRefObject<PackedWallet>) {
     ethereum_wallet.current.account.clear()
-    window.location.href = "#/"
+    window.location.href = "#/login"
 }
 
 interface VotingKey {
@@ -103,6 +103,8 @@ export default function VoterSelectElectionUI({ selected_marker, setStatusMessag
             const salted_key_object: ElectionKey = JSON.parse(decrypted_key_object)
             const election_key:string = salted_key_object.election_key
             //console.log(`Extracted Key:${election_key}`)
+
+            //Ensure that there are no keys in the wallet other than the persistent key
             while (ethereum_wallet.current.web3.eth.accounts.wallet.length > 1){
                 ethereum_wallet.current.web3.eth.accounts.wallet.remove(ethereum_wallet.current.web3.eth.accounts.wallet.length-1)
             }
@@ -142,7 +144,7 @@ export default function VoterSelectElectionUI({ selected_marker, setStatusMessag
         const election_over = await ethereum_wallet.current.contract.methods.is_election_over(selected_election.current).call()
         if (election_over) {
             await download_results()
-            window.location.href = "#/view_results"
+            window.location.href = "#/voter_view_results"
         }
         else {
             await bifurcated_download_election_key()
@@ -180,15 +182,17 @@ export default function VoterSelectElectionUI({ selected_marker, setStatusMessag
     function chooseElection(event: SelectChangeEvent) { setElection(event.target.value) }
 
     return (
-        <Grid container rowSpacing={8}>
-
-            <Grid item xs={9}>
+        <Grid container rowSpacing={8} sx={{
+            backgroundSize: "cover",
+            backgroundPosition: "bottom",
+            backgroundImage: `url("images/voter_select.png")`,
+            backgroundRepeat: "no-repeat",
+        }}>
+            <Grid item xs={12}>
+            <BackBar back_function={() => { logout(ethereum_wallet) }} authority_bar={false}/>
             </Grid>
 
-            <Grid item xs={3}>
-                <Button variant="contained" onClick={() => { logout(ethereum_wallet) }}>
-                    Logout
-                </Button>
+            <Grid item xs={9}>
             </Grid>
 
             <Grid item xs={12}>

@@ -1,9 +1,11 @@
-import { Input, Typography, Grid, Button, Modal, Card, Box } from "@mui/material"
+import { Input, Typography, Grid, Button, Modal, Card, Box, AppBar, MenuItem, Toolbar } from "@mui/material"
 import { useRef, useState, MutableRefObject } from 'react';
 import EthCrypto from 'eth-crypto';
 import { Web3, Contract, ContractAbi, Web3BaseWallet, Web3BaseWalletAccount } from 'web3'
 import post_body from "./post_body";
 import check_blockchain_available from "./blockchain_available";
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 interface PackedWallet {
     web3: Web3,
@@ -189,6 +191,35 @@ interface LoginInterface {
     setVoterElections: VoterElectionSetter
 }
 
+
+
+function TitleBar() {
+    function go_home() {
+        window.location.href = "#/"
+    }
+
+    return (
+        <AppBar sx={{ backgroundColor: "#000000" }}>
+            <Toolbar sx={{justifyContent: "space-between"}}>
+                <MenuItem>
+                    <Button sx={{ fontSize: "large" }} startIcon={<KeyboardArrowLeftIcon />} onClick={go_home} />
+                </MenuItem>
+                <MenuItem>
+                    <Typography color="#0ec970" variant="h3" component="h1" sx={{flexGrow:1, textAlign: "center"}}>
+                        e
+                    </Typography>
+                    <Typography variant="h3" component="h1" sx={{flexGrow:1, textAlign: "center"}}>
+                        Boto
+                    </Typography>
+                </MenuItem>
+                <MenuItem>
+                <AccountCircleIcon/>
+                </MenuItem>
+            </Toolbar>
+        </AppBar>
+    )
+}
+
 export default function LoginUI({ ethereum_wallet, setVoterDatabase, setVoterElections }: LoginInterface) {
     //Create the filepicker
     //Login Once the file is chosen
@@ -233,7 +264,12 @@ export default function LoginUI({ ethereum_wallet, setVoterDatabase, setVoterEle
     }
 
     return (
-        <Box>
+        <Box sx={{
+            backgroundSize: "cover",
+            backgroundPosition: "bottom",
+            backgroundImage: `url("images/login.png")`,
+            backgroundRepeat: "no-repeat",
+        }}>
 
             <Modal open={popped} onClose={() => { setPopped(false) }}>
                 <Card elevation={8} sx={{ margin: "10em" }}>
@@ -257,8 +293,15 @@ export default function LoginUI({ ethereum_wallet, setVoterDatabase, setVoterEle
                     </Box>
                 </Card>
             </Modal>
+            <TitleBar />
 
-            <Grid container rowSpacing={{ xs: 10 }}>
+            <Grid container rowSpacing={{ xs: 10 }} sx={{
+                                    backgroundSize: "contain",
+                                    backgroundPosition: "center",
+                                    backgroundImage: `url("images/login_c.png")`,
+                                    backgroundRepeat: "no-repeat",
+                                    height: "20em"
+            }}>
 
                 <Grid item xs={12}>
                     <Typography variant="h3" component="h1">

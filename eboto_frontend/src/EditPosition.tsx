@@ -2,6 +2,7 @@ import {Card,Grid,Button} from '@mui/material'
 import {DataGrid, GridColDef, GridRowModesModel, GridRowModes } from '@mui/x-data-grid'
 import {useState, MutableRefObject} from 'react'
 import {Web3, Contract, ContractAbi, Web3BaseWallet, Web3BaseWalletAccount} from 'web3'
+import BackBar from './BackBar'
 
 interface CandidateRow{
     id: number,
@@ -104,7 +105,16 @@ function submit_changes(){
 }
 
 return (
-<Grid container rowSpacing={5}>
+<Grid container rowSpacing={5} sx={{
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundImage: `url("images/edit_position.png")`,
+            backgroundRepeat: "no-repeat",
+        }}>
+<Grid item xs={12}>
+<BackBar back_function={()=>{window.location.href="#/modify_election"}} authority_bar={true}/>
+</Grid>
+
 <Grid item xs={12}>
 <CandidateCard rows={rows} setRows={setRows}/>
 </Grid>

@@ -1,8 +1,9 @@
-import { Container, Typography, Grid, Button, Card } from "@mui/material"
+import { Box,Container, Typography, Grid, Button, Card } from "@mui/material"
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { MutableRefObject } from 'react'
 import { Web3, Contract, ContractAbi, Web3BaseWallet, Web3BaseWalletAccount } from 'web3'
 import EthCrypto from 'eth-crypto'
+import BackBar from "./BackBar"
 interface VoterRow {
     id: number,
     eth_address: string,
@@ -197,7 +198,7 @@ function ControlCard({ setStatusMessage, setSelectiveDB, rows, setElectionList, 
     }
 
     return (
-        <Card elevation={8} style={{ padding: "1em" }} >
+        <Box>
             <Grid container rowSpacing={3}>
 
                 <Grid item xs={12}>
@@ -220,13 +221,13 @@ function ControlCard({ setStatusMessage, setSelectiveDB, rows, setElectionList, 
                 </Grid>
 
             </Grid>
-        </Card>
+        </Box>
     )
 }
 
 function logout(ethereum_wallet: MutableRefObject<PackedWallet>) {
     ethereum_wallet.current.account.clear()
-    window.location.href = "#/"
+    window.location.href = "#/login"
 }
 
 interface ElectionAuthorityInterface {
@@ -241,19 +242,18 @@ interface ElectionAuthorityInterface {
 export default function ElectionAuthorityUI({ setStatusMessage, ethereum_wallet, rows, setSelectiveDB, setElectionList, selected_election, setElectionResults }: ElectionAuthorityInterface) {
 
     return (
-        <Container>
+        <Container sx={{
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundImage: `url("images/authority.png")`,
+            backgroundRepeat: "no-repeat",
+        }} maxWidth={false}>
+            
             <Grid container spacing={5}>
 
-                <Grid item xs={9}>
+                <Grid item xs={12}>
+                <BackBar back_function={() => { logout(ethereum_wallet) }} authority_bar={true}/>
                 </Grid>
-
-                <Grid item xs={3}>
-                    <Button variant="contained" onClick={() => { logout(ethereum_wallet) }}>
-                        Logout
-                    </Button>
-
-                </Grid>
-
                 <Grid item xs={6}>
                     <VotersCard rows={rows} />
                 </Grid>

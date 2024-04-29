@@ -4,6 +4,7 @@ import { Web3, Contract, Web3BaseWallet, Web3BaseWalletAccount, ContractAbi } fr
 import dayjs, { Dayjs } from 'dayjs'
 import EthCrypto from 'eth-crypto'
 import post_body from "./post_body"
+import BackBar from "./BackBar"
 
 interface VoterRow {
     id: number,
@@ -121,7 +122,16 @@ export default function ModifyElectionUI({ selected_election, setCandidateList, 
     }
 
     return (
-        <Card elevation={8} style={{ padding: "1em" }}>
+        <Card elevation={8} style={{ padding: "1em" }} sx={{
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundImage: `url("images/modify.png")`,
+            backgroundRepeat: "no-repeat",
+            alignItems: "stretch",
+            justifyContent: "center",
+            display: "flex"
+        }}>
+            <BackBar back_function={()=>{window.location.href="#/ea_select_election"}} authority_bar={true}/>
             <Grid container rowSpacing={3}>
 
                 <Grid item xs={12}>
