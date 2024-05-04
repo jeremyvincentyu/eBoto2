@@ -7,3 +7,4 @@ include/
 lib/
 lib64/
 node_modules/
+audit.log
