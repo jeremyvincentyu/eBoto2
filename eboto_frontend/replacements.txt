@@ -1,0 +1,65 @@
+{
+    "MIT": [
+        "imurmurhash",
+        "undici-types",
+        "punycode",
+        "elliptic",
+        "isomorphic-timers-promises",
+        "node-addon-api",
+        "balanced-match",
+        "esbuild",
+        "node-stdlib-browser",
+        "setimmediate",
+        "tr46",
+        "natural-compare",
+        "nan",
+        "hmac-drbg",
+        "json-parse-even-better-errors",
+        "scrypt-js",
+        "aes-js",
+        "json5",
+        "minimalistic-crypto-utils",
+        "fast-levenshtein",
+        "ignore",
+        "vite",
+        "keyv",
+        "ethers",
+        "jsesc",
+        "react-router-dom",
+        "constants-browserify",
+        "js-sha3",
+        "react-router",
+        "rollup",
+        "node-fetch",
+        "bindings",
+        "brorand",
+        "timers-browserify",
+        "hash.js",
+        "des.js",
+        "js-sha256",
+        "whatwg-url",
+        "ts-api-utils",
+        "find-root",
+        "miller-rabin",
+        "bs58",
+        "base-x",
+        "ms"
+    ],
+    "BSD-2-Clause": [
+        "esrecurse",
+        "webidl-conversions",
+        "esutils",
+        "estraverse"
+    ],
+    "Apache-2.0": [
+        "typescript"
+    ],
+    "BSD-3-Clause": [
+        "qs",
+        "hoist-non-react-statics",
+        "esquery"
+    ],
+    "Artistic-2.0": [
+        "domain-browser"
+    ]
+}

@@ -1,23 +1,26 @@
 import { AppBar, Toolbar, Card, MenuItem, Grid, Button, Typography, Box } from "@mui/material"
+
+import BottomBar from "./BottomBar"
+
 function login() {
     window.location.href = "#/login"
 }
 
 
 
-function TitleBar(){
+function TitleBar() {
     return (
-        <AppBar sx={{backgroundColor: "#000000"}}>
-        <Toolbar>
-        <MenuItem>
-        <Typography color="#0ec970" variant="h3" component="h1">
-            e
-        </Typography>
-        <Typography variant="h3" component="h1">
-            Boto
-        </Typography>
-        </MenuItem>
-        </Toolbar>
+        <AppBar sx={{ backgroundColor: "#000000" }}>
+            <Toolbar>
+                <MenuItem>
+                    <Typography color="#0ec970" variant="h3" component="h1">
+                        e
+                    </Typography>
+                    <Typography variant="h3" component="h1">
+                        Boto
+                    </Typography>
+                </MenuItem>
+            </Toolbar>
         </AppBar>
     )
 }
@@ -27,7 +30,7 @@ export default function WelcomeScreen() {
 
         <Grid container columnSpacing={5} rowSpacing={5}>
             <Grid item xs={12}>
-            <TitleBar/>
+                <TitleBar />
             </Grid>
 
             <Grid item xs={12} md={6}>
@@ -83,7 +86,9 @@ export default function WelcomeScreen() {
                 </Box>
 
             </Grid>
-
+            <Grid item xs={12}>
+                <BottomBar />
+            </Grid>
         </Grid >
 
 
