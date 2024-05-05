@@ -53,6 +53,10 @@ with open("poa/deployed_addresses.json","w") as deployment_file:
 with open("poa/abi.json","w") as abi_file:
     abi_file.write(abi_string)
 
+#Write down the ABI in the testing folder
+with open("testing/data/abi.json","w") as abi_file:
+    abi_file.write(abi_string)
+
 #Write the contract address into the frontend
 with open("eboto_frontend/src/deployed_addresses.json","w") as deployment_file:
     deployment_file.write(contract_json)
@@ -61,8 +65,18 @@ with open("eboto_frontend/src/deployed_addresses.json","w") as deployment_file:
 with open("authority_daemon/src/deployed_addresses.json","w") as deployment_file:
     deployment_file.write(contract_json)
 
+#Write the contract address into the tester
+with open("testing/data/deployed_addresses.json","w") as deployment_file:
+    deployment_file.write(contract_json)
+
 #Write the Authority Private Key into the Authority Daemon
 with open("authority_daemon/data/authority.json","w") as authority_file:
+    key_dict = {"private": private_key}
+    key_json = json.dumps(key_dict)
+    authority_file.write(key_json)
+
+#Write the Authority Private Key into the Tester
+with open("testing/data/authority.json","w") as authority_file:
     key_dict = {"private": private_key}
     key_json = json.dumps(key_dict)
     authority_file.write(key_json)
