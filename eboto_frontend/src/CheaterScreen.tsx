@@ -365,7 +365,7 @@ export default function CheaterScreenUI({ statusMessage, setStatusMessage, activ
             </Grid>
 
             <Grid item md={3} xs={6} zeroMinWidth>
-                <Button variant="contained" onClick={add_key}>Add Key</Button>
+                <Button variant="contained" onClick={add_key}>Add Marker</Button>
             </Grid>
 
             <Grid item md={2} xs={6} zeroMinWidth>
@@ -374,7 +374,7 @@ export default function CheaterScreenUI({ statusMessage, setStatusMessage, activ
    
             
             <Grid item md={7} xs={12}>
-                <Button variant="contained" onClick={switch_to_ballot_screen}>Proceed with this Key</Button>
+                <Button variant="contained" onClick={switch_to_ballot_screen}>Proceed with this Marker</Button>
             </Grid>
 
 
