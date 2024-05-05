@@ -168,7 +168,8 @@ class Election:
         dates: dict[str,str] = json.loads(self.read_election_data()) 
         start_date = parser.parse(dates["start_Date_string"])
         end_date = parser.parse(dates["end_Date_string"])
-
+        print(f"Recovered Start Date is {start_date}")
+        print(f"Recovered End Date is {end_date}")
         self.mutex.acquire()
         #Check if current time has already exceeded end time. If so, end and tally. 
         election_time_up = current_time > end_date
@@ -181,8 +182,8 @@ class Election:
         #print(f"Start date less current time is {start_date - current_time}")
         prep_time: bool = start_date - current_time < timedelta(hours=5)
         not_visible:bool = not (self.contract.functions.is_visible(self.election_name).call())
-        #print(f"prep time evaluates to {prep_time}")
-        #print(f"not visible evaluates to {not_visible}")
+        print(f"prep time evaluates to {prep_time}")
+        print(f"not visible evaluates to {not_visible}")
         must_start_priming = prep_time and not_visible
 
         #If so, perform priming

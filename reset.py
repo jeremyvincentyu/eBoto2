@@ -28,6 +28,10 @@ system(erase_old_elections)
 erase_old_list = "rm isolator/data/election_list.json"
 system(erase_old_list)
 
+#Remove the old private keys from the tester
+erase_old_keys = "rm -rf testing/data/private_keys && mkdir testing/data/private_keys"
+system(erase_old_keys)
+
 #Reset Geth using start.py
 reset_geth_command = "bash reset_geth.sh"
 system(reset_geth_command)

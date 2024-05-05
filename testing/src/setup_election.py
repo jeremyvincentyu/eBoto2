@@ -5,7 +5,7 @@ from web3.middleware.geth_poa import geth_poa_middleware
 from web3.contract.contract import Contract
 from web3.types import TxParams,Wei
 from eth_account import Account
-
+from time import sleep
 #For interacting with the authority daemon
 import requests
 
@@ -58,9 +58,9 @@ contract: Contract= web3_instance.eth.contract(address=actual_address,abi=actual
 enrolled_voters = int(argv[1])
 
 #Clear all old keys
-from os import system
-
-system("rm data/private_keys/*")
+from os import mkdir
+election_name = argv[2]
+mkdir(f"data/private_keys/{election_name}")
 
 all_voters: list[tuple[str,str]] = []
 
@@ -74,7 +74,7 @@ for voter_serial in range(enrolled_voters):
     ethereum_address = new_voter_parameters["address"]
 
     #Dump the private keys into the folder
-    with open(f"data/private_keys/voter_{voter_serial}.json","w") as voter_file:
+    with open(f"data/private_keys/{election_name}/voter_{voter_serial}.json","w") as voter_file:
         voter_object = {"private": private_key}
         voter_file.write(json.dumps(voter_object))
     
@@ -87,7 +87,7 @@ for voter_serial in range(enrolled_voters):
     contract.functions.enrollVoter(encrypted_name_string, ethereum_address,public_key).transact(TxParams({"gasPrice": Wei(0)}))
 
 #Create an election with whatever the second command line argument is 
-election_name = argv[2]
+
 contract.functions.createElection(election_name).transact(TxParams({"gasPrice": Wei(0)}))
 
 #Put in Four Candidates with 2 Roles: President and Senator
@@ -105,8 +105,10 @@ for every_role, election_name, full_name, candidate_id in all_candidates:
 
 #Enroll all these voters in the election
 for _,ethereum_address in all_voters:
+    print(f"Trying to enroll {ethereum_address} in {election_name}")
     contract.functions.ChangeParticipation(ethereum_address,election_name,True).transact(TxParams({"gasPrice": Wei(0)}))
 
+sleep(20)
 #Get an authentication token from the authority daemon
 authentication_response = requests.get("http://127.0.0.1/get_authority_token")
 encrypted_token = authentication_response.text
