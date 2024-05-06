@@ -349,7 +349,7 @@ export default function CheaterScreenUI({ statusMessage, setStatusMessage, activ
     return (
         <Grid container rowSpacing={{xs: 4, md:10}} columnSpacing={{xs: 4, md:10}}>
             <Grid item xs={12} md={12} zeroMinWidth>
-                <BackBar back_function={()=>{window.location.href="/voter_select_election"}} authority_bar={false}/>
+                <BackBar back_function={()=>{window.location.href="/#/voter_select_election"}} authority_bar={false}/>
             </Grid>
 
             <Grid item xs={12} md={12} zeroMinWidth>
