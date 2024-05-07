@@ -22,7 +22,11 @@ system(refill_command)
 
 #Remove the old elections from the isolator
 erase_old_elections = "rm -r isolator/data/elections/*"
-mkdir("isolator/data/elections")
+try:
+    mkdir("isolator/data/elections")
+except:
+    print("isolator/data/elections already exists")
+    
 system(erase_old_elections)
 
 #Remove the old election list from the isolator
