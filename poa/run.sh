@@ -1,1 +1,1 @@
-geth --datadir data --networkid 12345 --signer ./clef/clef.ipc --mine --miner.etherbase=0xd3c494103f20F73a15141b6E0E7551626D489E97 --http --http.port 8545 --http.corsdomain "*"
+geth --datadir data --networkid 12345 --signer ./clef/clef.ipc --mine --miner.etherbase=0x5E25477947EFf6ff81393E75C229612E586E4E95 --http --http.port 8545 --http.corsdomain "*"
