@@ -4,7 +4,7 @@ from eth_crypto import generate_keypair
 from hashlib import sha256
 import json
 
-system("pwd")
+#system("pwd")
 #Assume that the starting directory is the poa root, and that this command is being run as python3 src/
 
 system("rm -rf clef && rm -rf data")

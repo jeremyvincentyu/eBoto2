@@ -1,0 +1,11 @@
+	deleted by us:   authority_daemon/data/dates/95a2f1edb08a76120b82cec7c93ca477618639f04beac7d2aeba2dc039d43715
+	both modified:   authority_daemon/src/deployed_addresses.json
+	both modified:   eboto_frontend/src/deployed_addresses.json
+	both modified:   isolator/data/ea_pubkey.json
+	deleted by us:   isolator/data/elections/95a2f1edb08a76120b82cec7c93ca477618639f04beac7d2aeba2dc039d43715/config.json
+	both modified:   isolator/src/deployed_addresses.json
+	both modified:   poa/deployed_addresses.json
+	both modified:   poa/dispenser.json
+	both modified:   poa/genesis.json
+	both modified:   poa/run.sh
+	both added:      testing/.gitignore
