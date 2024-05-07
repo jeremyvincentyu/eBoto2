@@ -1,0 +1,9 @@
+	authority_daemon/data/authority.json
+	authority_daemon/src/deployed_addresses.json
+	eboto_frontend/src/deployed_addresses.json
+	isolator/data/ea_pubkey.json
+	isolator/src/deployed_addresses.json
+	poa/deployed_addresses.json
+	poa/dispenser.json
+	poa/genesis.json
+	poa/run.sh
