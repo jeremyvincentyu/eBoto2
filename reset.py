@@ -1,4 +1,4 @@
-from os import system
+from os import system,mkdir
 
 #Erase the old election list
 erase_list_command = "rm authority_daemon/data/election_list.txt"
@@ -22,6 +22,7 @@ system(refill_command)
 
 #Remove the old elections from the isolator
 erase_old_elections = "rm -r isolator/data/elections/*"
+mkdir("isolator/data/elections")
 system(erase_old_elections)
 
 #Remove the old election list from the isolator
